@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useNavigate } from "react-router-dom"; // Added for structural Sign Out redirection
 
 // COMPONENTS
@@ -48,8 +48,8 @@ const AdminEvacuationCenters = () => {
   // =====================================
   const fetchCenters = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/admin-evacuation-centers"
+      const response = await api.get(
+        "/admin-evacuation-centers"
       );
       setCenters(response.data);
     } catch (error) {
@@ -73,10 +73,11 @@ const AdminEvacuationCenters = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "http://localhost:5000/api/admin-evacuation-centers",
+      await api.post(
+        "/admin-evacuation-centers",
         form
       );
+
       fetchCenters();
       setForm({
         center_name: "",
@@ -105,8 +106,8 @@ const AdminEvacuationCenters = () => {
   // =====================================
   const deleteCenter = async (id) => {
     try {
-      await axios.delete(
-        `http://localhost:5000/api/admin-evacuation-centers/${id}`
+      await api.delete(
+        `/admin-evacuation-centers/${id}`
       );
       fetchCenters();
     } catch (error) {
@@ -151,8 +152,8 @@ const AdminEvacuationCenters = () => {
               borderRadius: "14px",
               border: "1px solid #e2e8f0",
               boxShadow: "0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03)",
-              position: "sticky",
-              top: "24px"
+              position: "relative",
+              top: 0
             }}
           >
             <h2 style={{ margin: "0 0 6px 0", fontSize: "24px", fontWeight: "800", color: "#0f172a", letterSpacing: "-0.5px" }}>

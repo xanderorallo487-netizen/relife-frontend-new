@@ -7,7 +7,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-import axios from "axios";
+import api from "../services/api";
 
 const StaffHeader = () => {
 
@@ -63,8 +63,8 @@ const StaffHeader = () => {
       try {
 
         const response =
-          await axios.get(
-            `http://localhost:5000/api/admin-messages/${user?.id}`
+          await api.get(
+            `/admin-messages/${user?.id}`
           );
 
         setMessages(
@@ -132,8 +132,8 @@ const StaffHeader = () => {
 
         // SEND REPLY
 
-        await axios.post(
-          "http://localhost:5000/api/admin-messages/reply",
+        await api.post(
+          "/admin-messages/reply",
           {
 
             sender_id:
@@ -153,8 +153,8 @@ const StaffHeader = () => {
 
         // MARK MESSAGE AS READ
 
-        await axios.put(
-          `http://localhost:5000/api/admin-messages/read/${msg.message_id}`
+        await api.put(
+          `/admin-messages/read/${msg.message_id}`
         );
 
         // REMOVE MESSAGE FROM UI
@@ -220,8 +220,8 @@ const StaffHeader = () => {
 
         if (user) {
 
-          await axios.post(
-            "http://localhost:5000/api/audit-logs/create",
+          await api.post(
+            "/audit-logs/create",
             {
 
               action_type:
@@ -260,17 +260,20 @@ const StaffHeader = () => {
 
     <div
       style={{
-        background: "#0f172a",
+        background: "#092f2b",
         color: "white",
-        padding: "18px 30px",
+        padding: "16px 28px",
         display: "flex",
         justifyContent:
           "space-between",
         alignItems:
           "center",
         boxShadow:
-          "0 2px 10px rgba(0,0,0,0.1)",
-        position: "relative"
+          "0 4px 18px rgba(9,47,43,0.22)",
+        borderBottom:
+          "3px solid #d8f36b",
+        position:
+          "relative"
       }}
     >
 
@@ -282,10 +285,12 @@ const StaffHeader = () => {
           style={{
             margin: 0,
             fontSize: "24px",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: "#ffffff",
+            letterSpacing: "1px"
           }}
         >
-          RELIEFNOTIFY
+          RELIFENOTIFY
         </h2>
 
         <p
@@ -315,7 +320,8 @@ const StaffHeader = () => {
 
         <div
           style={{
-            position: "relative"
+            position:
+              "relative"
           }}
         >
 
@@ -327,13 +333,13 @@ const StaffHeader = () => {
             }
             style={{
               background:
-                "#1e293b",
+                "rgba(255,255,255,0.1)",
               border: "none",
               color: "white",
               fontSize: "20px",
               cursor: "pointer",
               padding: "10px 14px",
-              borderRadius: "10px",
+              borderRadius: "8px",
               position: "relative"
             }}
           >
